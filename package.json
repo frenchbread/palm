@@ -1,0 +1,22 @@
+{
+  "name": "palm",
+  "version": "0.0.1",
+  "description": "Just a palm.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frenchbread/palm.git"
+  },
+  "keywords": [
+    "palm"
+  ],
+  "author": "Damir Mustafin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frenchbread/palm/issues"
+  },
+  "homepage": "https://github.com/frenchbread/palm#readme"
+}
