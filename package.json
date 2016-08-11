@@ -4,7 +4,10 @@
   "description": "Just a palm.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build && node ./lib/server.js",
+    "build": "node_modules/babel-cli/bin/babel.js src --out-dir lib",
+    "test": "npm build && ava",
+    "prepublish": "npm build"
   },
   "repository": {
     "type": "git",
@@ -18,5 +21,20 @@
   "bugs": {
     "url": "https://github.com/frenchbread/palm/issues"
   },
-  "homepage": "https://github.com/frenchbread/palm#readme"
+  "homepage": "https://github.com/frenchbread/palm#readme",
+  "dependencies": {
+    "got": "^6.3.0",
+    "lodash": "^4.14.2"
+  },
+  "devDependencies": {
+    "ava": "^0.15.2",
+    "babel-cli": "^6.11.4",
+    "babel-core": "^6.11.4",
+    "babel-preset-es2015": "^6.9.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
 }
