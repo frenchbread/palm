@@ -43,11 +43,11 @@ export class Palm extends EventEmitter {
 
     let a = {
       ok: false
-    }
+    };
 
     for (let key in this.modules) {
       _.forEach(this.modules[key].keywords, (keyword) => {
-        if (str(text).contains(keyword)) {
+        if (text.match(new RegExp(keyword, 'i'))) {
             a.ok = true;
             a.run = this.modules[key].run
         };

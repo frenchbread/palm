@@ -1,8 +1,6 @@
 export const start = {
   name: 'default',
-  keywords: [
-    '*'
-  ],
+  keywords: [],
   run () {
     console.log('Default module called!');
     return 'Default module called!';
