@@ -41,7 +41,7 @@ export class Palm extends EventEmitter {
 
   respond (message) {
 
-    const to = this._parent;//message.chat.id;
+    const to = this._parent; // message.chat.id;
     const text = message.text
 
     const module = this._initModule(text);
