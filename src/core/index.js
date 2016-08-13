@@ -11,6 +11,7 @@ export class Palm extends EventEmitter {
     super(params);
     this._host = params.host;
     this._token = params.token;
+    this._parent = params.parent;
     this._recipient = null;
     this._offset = 0;
     this.modules = require('../modules');
@@ -23,18 +24,32 @@ export class Palm extends EventEmitter {
     }, 3000);
   }
 
-  send () {
-    // TODO; send method
+  send (data) {
+
+    const { to, text } = data;
+
+    const url = this._host + this._token + '/sendMessage?chat_id=' + to + '&text=' + text;
+
+    got(url)
+      .then(response => {
+        console.log('Message sent');
+      })
+      .catch(error => {
+        console.error(error);
+      })
   }
 
-  respond (text) {
+  respond (message) {
+
+    const to = this._parent;//message.chat.id;
+    const text = message.text
 
     const module = this._initModule(text);
 
     if (module.ok) {
-      module.run();
+      this.send({ to, text: module.run() });
     } else {
-      this.modules['start'].run();
+      this.send({ to, text: this.modules['start'].run() });
     }
   }
 
