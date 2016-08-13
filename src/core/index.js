@@ -3,6 +3,7 @@ import { EventEmitter } from 'events';
 import config from '../config';
 import got from 'got';
 import _ from 'lodash';
+import str from 'string';
 
 export class Palm extends EventEmitter {
 
@@ -12,6 +13,7 @@ export class Palm extends EventEmitter {
     this._token = params.token;
     this._recipient = null;
     this._offset = 0;
+    this.modules = require('../modules');
   }
 
   listen () {
@@ -23,6 +25,36 @@ export class Palm extends EventEmitter {
 
   send () {
     // TODO; send method
+  }
+
+  respond (text) {
+
+    const module = this._initModule(text);
+
+    if (module.ok) {
+      module.run();
+    } else {
+      this.modules['start'].run();
+    }
+  }
+
+
+  _initModule (text) {
+
+    let a = {
+      ok: false
+    }
+
+    for (let key in this.modules) {
+      _.forEach(this.modules[key].keywords, (keyword) => {
+        if (str(text).contains(keyword)) {
+            a.ok = true;
+            a.run = this.modules[key].run
+        };
+      });
+    }
+
+    return a;
   }
 
   _getUpdates () {
@@ -44,11 +76,9 @@ export class Palm extends EventEmitter {
       .then(messages => {
 
         if (messages.length > 0) {
-
           this._updateOffset(messages);
-          _.forEach(messages, message => this.emit('message', message));
+          _.forEach(messages, message => this.emit('message', message.message));
         }
-
       })
       .catch(error => {
         console.error(error);
