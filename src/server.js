@@ -4,6 +4,7 @@ import config from './config';
 const palm = new Palm(config.telegram);
 
 palm.on('message', (message) => {
+  palm.respond(message.text);
   console.log('Got message');
 });
 
