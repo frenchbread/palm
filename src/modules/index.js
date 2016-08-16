@@ -10,7 +10,11 @@ export const greet = {
   name: 'greet',
   keywords: [
     'hi',
-    'hello'
+    'hello',
+    'hey',
+    'what up',
+    'what\'s up',
+    'how is it going'
   ],
   run () {
     return 'Hello';
