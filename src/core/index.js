@@ -53,7 +53,6 @@ export class Palm extends EventEmitter {
     }
   }
 
-
   _initModule (text) {
 
     let a = {
