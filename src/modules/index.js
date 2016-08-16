@@ -2,8 +2,7 @@ export const start = {
   name: 'default',
   keywords: [],
   run () {
-    console.log('Default module called!');
-    return 'Default module called!';
+    return 'I don\'t understand what you mean, sir!';
   }
 }
 
@@ -14,7 +13,6 @@ export const greet = {
     'hello'
   ],
   run () {
-    console.log('Hello module is called');
     return 'Hello';
   }
 }
@@ -25,7 +23,16 @@ export const buy = {
     'buy'
   ],
   run () {
-    console.log('Buy module is called');
     return 'Buy';
+  }
+}
+
+export const time = {
+  name: 'time',
+  keywords: [
+    'what time is it'
+  ],
+  run () {
+    return new Date();
   }
 }
