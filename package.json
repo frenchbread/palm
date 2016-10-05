@@ -24,8 +24,8 @@
   "homepage": "https://github.com/frenchbread/palm#readme",
   "dependencies": {
     "got": "^6.3.0",
-    "lodash": "^4.14.2",
-    "string": "^3.3.1"
+    "intel": "^1.1.1",
+    "lodash": "^4.14.2"
   },
   "devDependencies": {
     "ava": "^0.15.2",
@@ -75,7 +75,18 @@
       "no-underscore-dangle": [
         2,
         {
-          "allow": ["_id", "__"]
+          "allow": [
+            "_id",
+            "__",
+            "_host",
+            "_token",
+            "_parent",
+            "_recipient",
+            "_offset",
+            "_updateOffset",
+            "_getUpdates",
+            "_initModule"
+          ]
         }
       ]
     }
