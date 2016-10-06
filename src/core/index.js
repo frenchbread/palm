@@ -2,7 +2,6 @@ import { EventEmitter } from 'events';
 
 import got from 'got';
 import _ from 'lodash';
-import intel from 'intel';
 
 export class Palm extends EventEmitter {
 
@@ -17,7 +16,7 @@ export class Palm extends EventEmitter {
   }
 
   listen () {
-    intel.info('Listening for updates ..');
+    console.log('Listening for updates ..');
     setInterval(() => {
       this._getUpdates();
     }, 3000);
@@ -29,8 +28,8 @@ export class Palm extends EventEmitter {
     const url = `${this._host + this._token}/sendMessage?chat_id=${to}&text=${text}`;
 
     got(url)
-      .then(response => intel.info('Message sent'))
-      .catch(error => intel.error(error));
+      .then(response => console.log('Message sent'))
+      .catch(error => console.error(error));
   }
 
   respond (message) {
@@ -72,7 +71,7 @@ export class Palm extends EventEmitter {
         if (bodyJSON.ok) {
           return bodyJSON.result;
         }
-        intel.error('Reponse is not OK');
+        console.error('Reponse is not OK');
         return false;
       })
       .then((messages) => {
@@ -82,7 +81,7 @@ export class Palm extends EventEmitter {
         }
       })
       .catch(error => {
-        intel.error(error);
+        console.error.error(error);
       });
   }
 
