@@ -3,8 +3,8 @@ export const start = {
   keywords: [],
   run () {
     return 'I don\'t understand what you mean, sir!';
-  }
-}
+  },
+};
 
 export const greet = {
   name: 'greet',
@@ -14,29 +14,29 @@ export const greet = {
     'hey',
     'what up',
     'what\'s up',
-    'how is it going'
+    'how is it going',
   ],
   run () {
     return 'Hello';
-  }
-}
+  },
+};
 
 export const buy = {
   name: 'buy',
   keywords: [
-    'buy'
+    'buy',
   ],
   run () {
     return 'Buy';
-  }
-}
+  },
+};
 
 export const time = {
   name: 'time',
   keywords: [
-    'what time is it'
+    'what time is it',
   ],
   run () {
     return new Date();
-  }
-}
+  },
+};
