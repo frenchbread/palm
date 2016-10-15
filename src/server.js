@@ -9,3 +9,5 @@ palm.on('message', (message) => {
 });
 
 palm.listen();
+
+export { palm };
