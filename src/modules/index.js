@@ -40,3 +40,13 @@ export const time = {
     return new Date();
   },
 };
+
+export const finance = {
+  name: 'finance',
+  keywords: [
+    'ss',
+  ],
+  run (text) {
+    return require('./ss').default(text);
+  },
+};
