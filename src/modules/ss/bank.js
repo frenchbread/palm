@@ -8,15 +8,23 @@ export default class Bank {
     this.palm = palm;
   }
 
-  changeBalance (amount) {
+  changeBalance (amount, currency) {
     return new Promise((resolve, reject) => {
       this.BankDB.findOne({ isBank: true }, (err, item) => {
         if (err) reject(err);
-        item.balance += amount;
-        item.save((err2) => {
-          if (err2) reject(err2);
-          resolve(item.balance);
-        });
+        if (!currency || currency === 'eur') {
+          item.eur += amount;
+          item.save((err2) => {
+            if (err2) reject(err2);
+            resolve(item.eur);
+          });
+        } else if (currency === 'rub') {
+          item.rub += amount;
+          item.save((err2) => {
+            if (err2) reject(err2);
+            resolve(item.rub);
+          });
+        }
       });
     });
   }
@@ -25,7 +33,7 @@ export default class Bank {
     return new Promise((resolve, reject) => {
       this.BankDB.findOne({ isBank: true }, (err, item) => {
         if (err) reject(err);
-        resolve(item.balance);
+        resolve([item.eur, item.rub]);
       });
     });
   }

@@ -5,7 +5,11 @@ const schema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
-  balance: {
+  eur: {
+    type: Number,
+    required: true,
+  },
+  rub: {
     type: Number,
     required: true,
   },
