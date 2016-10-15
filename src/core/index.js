@@ -39,7 +39,7 @@ export class Palm extends EventEmitter {
     const module = this._initModule(text);
 
     if (module.ok) {
-      this.send({ to, text: module.run() });
+      this.send({ to, text: module.run(text) });
     } else {
       this.send({ to, text: this.modules.start.run() });
     }
@@ -81,7 +81,7 @@ export class Palm extends EventEmitter {
         }
       })
       .catch(error => {
-        console.error.error(error);
+        console.error(error);
       });
   }
 
