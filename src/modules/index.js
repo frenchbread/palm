@@ -1,3 +1,5 @@
+import resta from './resta'
+
 export const start = {
   name: 'default',
   keywords: [],
@@ -50,3 +52,5 @@ export const finance = {
     return require('./ss').default(text);
   },
 };
+
+export { resta }
