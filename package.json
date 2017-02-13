@@ -25,6 +25,7 @@
   "dependencies": {
     "got": "^6.3.0",
     "lodash": "^4.14.2",
+    "moment": "^2.17.1",
     "mongoose": "^4.6.3"
   },
   "devDependencies": {
