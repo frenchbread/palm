@@ -1,2 +1,3 @@
 # palm
-:palm_tree:
+
+> :palm_tree: A Tree, that can talk.
