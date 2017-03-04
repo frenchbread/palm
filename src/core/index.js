@@ -1,16 +1,13 @@
-import { EventEmitter } from 'events'
-
 import _ from 'lodash'
 
 import cocos from '../cocos'
 import leaves from '../leaves'
 
-export default class Palm extends EventEmitter {
+export default class Palm {
 
   constructor (params) {
-    super(params)
     this.cocos = cocos
-    this.leaf = 'telegram'
+    this.leaf = params.talk
 
     this.telegram = new leaves.Telegram(params.telegram)
     this.cli = new leaves.Cli()
