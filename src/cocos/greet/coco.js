@@ -8,7 +8,13 @@ const phrases = [
   'sup',
   'yo',
   'dog',
-  'just chillax'
+  'just chillax',
+  'cool',
+  'ok',
+  'well',
+  'fine',
+  'wosup',
+  'why'
 ]
 
 export default {
