@@ -1,5 +1,5 @@
-import Palm from './core'
-import config from '../config'
+const { Palm } = require('./core')
+const config = require('../config')
 
 const palm = new Palm({
   talk: 'cli',

@@ -3,7 +3,7 @@ import _ from 'lodash'
 import cocos from '../cocos'
 import leaves from '../leaves'
 
-export default class Palm {
+export class Palm {
 
   constructor (params) {
     this.cocos = cocos
