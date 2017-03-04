@@ -1,7 +1,8 @@
 import _ from 'lodash'
-import { EventEmitter } from 'events'
-import initAxe from './lib/initAxe'
 import l from 'chalk-log'
+import { EventEmitter } from 'events'
+
+import initAxe from './lib/initAxe'
 
 export default class Telegram extends EventEmitter {
 
