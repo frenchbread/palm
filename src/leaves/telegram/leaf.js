@@ -1,16 +1,30 @@
 import _ from 'lodash'
+import { EventEmitter } from 'events'
 import initAxe from './lib/initAxe'
+import l from 'chalk-log'
 
-export default class Telegram {
+export default class Telegram extends EventEmitter {
 
   constructor ({ url, token, parent }) {
+    super({ url, token, parent })
     this.parent = parent
     this.axe = initAxe({ url, token })
     this._offset = 0
   }
 
-  send ({ to, text }) {
-    return this.axe.post(`/sendMessage?chat_id=${to}&text=${text}`)
+  init () {
+    setInterval(() => {
+      l.note('tick')
+      this.getNewMessages()
+        .then(msgs => _.forEach(msgs, msg => {
+          this.emit('message', msg.message.text)
+        }))
+        .catch(err => new Error(err))
+    }, 3000)
+  }
+
+  send ({ text }) {
+    return this.axe.post(`/sendMessage?chat_id=${this.parent}&text=${text}`)
       .then(res => res)
       .catch(err => err)
   }

@@ -24,6 +24,7 @@
   "homepage": "https://github.com/frenchbread/palm#readme",
   "dependencies": {
     "axios": "^0.15.3",
+    "chalk-log": "^1.2.0",
     "lodash": "^4.14.2"
   },
   "devDependencies": {

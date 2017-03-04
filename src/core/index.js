@@ -10,32 +10,27 @@ export default class Palm extends EventEmitter {
   constructor (params) {
     super(params)
     this.cocos = cocos
+    this.leaf = 'telegram'
+
     this.telegram = new leaves.Telegram(params.telegram)
+    this.cli = new leaves.Cli()
   }
 
   listen () {
-    setInterval(() => {
-      this.telegram.getNewMessages()
-        .then(msgs => _.forEach(msgs, msg => {
-          // this.emit('message', message.message)
-          this.getMessage(msg.message)
-        }))
-        .catch(err => new Error(err))
-    }, 3000)
+    this[this.leaf].init()
+
+    this[this.leaf].on('message', text => {
+      this.respond({ text })
+    })
   }
 
-  getMessage ({ from, chat, date, text }) {
-    this.respondToMessage({ text })
-  }
-
-  respondToMessage ({ text }) {
-    const to = this.telegram.parent // message.chat.id;
+  respond ({ text }) {
     const getCoco = this.initCoco(text)
 
     if (getCoco.ok) {
-      this.telegram.send({ to, text: getCoco.coco.exec(text) })
+      this[this.leaf].send({ text: getCoco.coco.exec(text) })
     } else {
-      this.telegram.send({ to, text: this.cocos.idk.exec() })
+      this[this.leaf].send({ text: this.cocos.idk.exec() })
     }
   }
 
