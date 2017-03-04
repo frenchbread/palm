@@ -6,16 +6,24 @@ import initAxe from './lib/initAxe'
 
 export default class Telegram extends EventEmitter {
 
-  constructor ({ url, token, parent }) {
-    super({ url, token, parent })
-    this.parent = parent
-    this.axe = initAxe({ url, token })
+  constructor (params) {
+    super(params)
+
+    this.parent = ''
+    this.axe = {}
     this._offset = 0
+
+    if (this._checkParams(params)) {
+      this.parent = params.parent
+      this.axe = initAxe({
+        url: params.url,
+        token: params.token
+      })
+    }
   }
 
   init () {
     setInterval(() => {
-      l.note('tick')
       this.getNewMessages()
         .then(msgs => _.forEach(msgs, msg => {
           this.emit('message', msg.message.text)
@@ -50,5 +58,31 @@ export default class Telegram extends EventEmitter {
     const ids = _.map(msgs, msg => msg.update_id)
 
     this._offset = Math.max.apply(null, ids) + 1
+  }
+
+  _checkParams (params) {
+    if (params) {
+      if (params.url) {
+        l.ok('Telegram <url> is ok.')
+      } else {
+        l.error('Telegram <url> parameter not found.')
+      }
+
+      if (params.token) {
+        l.ok('Telegram <token> is ok.')
+      } else {
+        l.error('Telegram <token> parameter is not found.')
+      }
+
+      if (params.parent) {
+          l.ok('Telegram <parent> is ok.')
+      } else {
+        l.error('Telegram <parent> parameter is not found.')
+      }
+      return true
+    } else {
+      l.error('Telegram params not found.')
+      return false
+    }
   }
 }
