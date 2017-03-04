@@ -1,15 +1,17 @@
 import _ from 'lodash'
+import l from 'chalk-log'
 
 import cocos from '../cocos'
 import leaves from '../leaves'
+import pkg from '../../package.json'
 
-export class Palm {
+export default class Palm {
 
   constructor (params) {
     this.cocos = cocos
     this.leaf = params.talk
 
-    if (this.leaf === 'talegram') {
+    if (this.leaf === 'telegram') {
       this.telegram = new leaves.Telegram(params.telegram)
     } else if (this.leaf === 'cli') {
       this.cli = new leaves.Cli()
@@ -17,6 +19,8 @@ export class Palm {
   }
 
   listen () {
+    l.note(`Initialized palm v${pkg.version}`)
+
     this[this.leaf].init()
 
     this[this.leaf].on('message', text => {
