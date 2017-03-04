@@ -9,8 +9,11 @@ export default class Palm {
     this.cocos = cocos
     this.leaf = params.talk
 
-    this.telegram = new leaves.Telegram(params.telegram)
-    this.cli = new leaves.Cli()
+    if (this.leaf === 'talegram') {
+      this.telegram = new leaves.Telegram(params.telegram)
+    } else if (this.leaf === 'cli') {
+      this.cli = new leaves.Cli()
+    }
   }
 
   listen () {

@@ -1,6 +1,6 @@
 {
   "name": "palm",
-  "version": "0.0.7",
+  "version": "0.0.10",
   "description": "A tree, that can talk.",
   "main": "index.js",
   "scripts": {
