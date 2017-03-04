@@ -1,13 +1,11 @@
-import { Palm } from './core';
-import config from './config';
+import Palm from './core'
+import config from '../config'
 
-const palm = new Palm(config.telegram);
+const palm = new Palm({
+  talk: 'cli',
+  telegram: config.telegram
+})
 
-palm.on('message', (message) => {
-  palm.respond(message);
-  console.log('Got message');
-});
+palm.listen()
 
-palm.listen();
-
-export { palm };
+export default palm

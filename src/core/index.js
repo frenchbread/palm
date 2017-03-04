@@ -1,97 +1,48 @@
-import { EventEmitter } from 'events';
+import _ from 'lodash'
 
-import got from 'got';
-import _ from 'lodash';
+import cocos from '../cocos'
+import leaves from '../leaves'
 
-export class Palm extends EventEmitter {
+export default class Palm {
 
   constructor (params) {
-    super(params);
-    this._host = params.host;
-    this._token = params.token;
-    this._parent = params.parent;
-    this._recipient = null;
-    this._offset = 0;
-    this.modules = require('../modules');
+    this.cocos = cocos
+    this.leaf = params.talk
+
+    this.telegram = new leaves.Telegram(params.telegram)
+    this.cli = new leaves.Cli()
   }
 
   listen () {
-    console.log('Listening for updates ..');
-    setInterval(() => {
-      this._getUpdates();
-    }, 3000);
+    this[this.leaf].init()
+
+    this[this.leaf].on('message', text => {
+      this.respond({ text })
+    })
   }
 
-  send (data) {
-    const { to, text } = data;
+  respond ({ text }) {
+    const getCoco = this.initCoco(text)
 
-    const url = `${this._host + this._token}/sendMessage?chat_id=${to}&text=${text}`;
-
-    got(url)
-      .then(response => console.log('Message sent'))
-      .catch(error => console.error(error));
-  }
-
-  respond (message) {
-    const to = this._parent; // message.chat.id;
-    const text = message.text;
-
-    const module = this._initModule(text);
-
-    if (module.ok) {
-      this.send({ to, text: module.run(text) });
+    if (getCoco.ok) {
+      this[this.leaf].send({ text: getCoco.coco.exec(text) })
     } else {
-      this.send({ to, text: this.modules.start.run() });
+      this[this.leaf].send({ text: this.cocos.idk.exec() })
     }
   }
 
-  _initModule (text) {
-    const a = {
-      ok: false,
-    };
+  initCoco (text) {
+    const a = { ok: false }
 
-    for (const key in this.modules) {
-      _.forEach(this.modules[key].keywords, (keyword) => {
+    for (const key in this.cocos) {
+      _.forEach(this.cocos[key].keywords, keyword => {
         if (text.match(new RegExp(keyword, 'i'))) {
-          a.ok = true;
-          a.run = this.modules[key].run;
+          a.ok = true
+          a.coco = this.cocos[key]
         }
-      });
+      })
     }
 
-    return a;
-  }
-
-  _getUpdates () {
-    const url = `${this._host + this._token}/getUpdates?offset=${this._offset}`;
-
-    got(url)
-      .then(response => JSON.parse(response.body))
-      .then(bodyJSON => {
-        if (bodyJSON.ok) {
-          return bodyJSON.result;
-        }
-        console.error('Reponse is not OK');
-        return false;
-      })
-      .then((messages) => {
-        if (messages.length > 0) {
-          this._updateOffset(messages);
-          _.forEach(messages, message => this.emit('message', message.message));
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-
-  _updateOffset (messages) {
-    const arr = [];
-
-    _.forEach(messages, (message) => {
-      arr.push(message.update_id);
-    });
-
-    this._offset = Math.max.apply(null, arr) + 1;
+    return a
   }
 }
