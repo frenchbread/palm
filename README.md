@@ -8,11 +8,6 @@
 $ npm i palm --save
 ```
 
-### Setup
-
-1. Clone - `git clone https://github.com/frenchbread/palm.git && cd palm`
-2. NPM install - `npm i`
-
 ### Usage
 
 ```js
@@ -31,6 +26,26 @@ const palm = new Palm({
 
 // Init listener
 palm.listen()
+
+// Send messages
+// If using within telegram, palm will send message to `parent` id
+// specified in settings
+palm.send({ text: 'Hi' })
+```
+
+### Development
+
+##### Setup
+
+1. Clone - `git clone https://github.com/frenchbread/palm.git && cd palm`
+2. NPM install - `npm i`
+3. Test - `npm test` (Modify `test.js` file)
+
+
+##### Build
+
+```
+$ npm run build
 ```
 
 ### Author
