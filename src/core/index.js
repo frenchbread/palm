@@ -28,6 +28,10 @@ export default class Palm {
     })
   }
 
+  send ({ text }) {
+    this[this.leaf].send({ text })
+  }
+
   respond ({ text }) {
     const getCoco = this.initCoco(text)
 
