@@ -8,8 +8,7 @@ export default class RocketChat extends EventEmitter {
 		super(params)
 
 		this.authOk = false
-		this.authToken = ''
-		this.userId = ''
+		this.headers = {}
 
 		this.axe = {}
 
@@ -20,14 +19,15 @@ export default class RocketChat extends EventEmitter {
 		setInterval(() => {
 			if (this.authOk) {
 				// ***** Example request *****
-				this.axe.get('/me', {
-					headers: {
-						'X-Auth-Token': this.authToken,
-						'X-User-Id': this.userId
-					}
-				}).then(res => {
-					console.log(res.data)
-				}).catch(err => l.error(err))
+				// const data = {
+				// 	channel: '#bot_test',
+				// 	text: 'Test 2'
+				// }
+				// this.axe.post('/chat.postMessage', data, { headers: this.headers })
+				// 	.then(res => {
+				// 		console.log(res.data)
+				// 	})
+				// 	.catch(err => l.error(err))
 				// ***** End example *****
 			}
 		}, 3000)
@@ -45,8 +45,10 @@ export default class RocketChat extends EventEmitter {
 				.then(auth => {
 					if (auth.status === 'success') {
 						l.ok('Authentication successfull.')
-						this.authToken = auth.data.authToken
-						this.userId = auth.data.userId
+						this.headers = {
+							'X-Auth-Token': auth.data.authToken,
+							'X-User-Id': auth.data.userId
+						}
 						this.authOk = true
 					} else {
 						l.error('Authentication error.')
