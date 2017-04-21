@@ -38,9 +38,13 @@ export default class Palm {
 		const getCoco = this.initCoco(text)
 
 		if (getCoco.ok) {
-			this[this.leaf].send({ text: getCoco.coco.exec(text, this[this.leaf]) })
+			getCoco.coco.exec(text, this[this.leaf])
+				.then(text => this.send({ text }))
+				.catch(err => l.error(err))
 		} else {
-			this[this.leaf].send({ text: this.cocos.idk.exec() })
+			this.cocos.idk.exec()
+				.then(text => this.send({ text }))
+				.catch(err => l.error(err))
 		}
 	}
 

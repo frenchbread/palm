@@ -23,6 +23,6 @@ export default {
 	details: 'Just some talk',
 	keywords: phrases,
 	exec () {
-		return phrases[Math.floor(Math.random() * phrases.length)]
+		return Promise.resolve(phrases[Math.floor(Math.random() * phrases.length)])
 	}
 }
