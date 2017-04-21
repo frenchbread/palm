@@ -15,6 +15,8 @@ export default class Palm {
 			this.telegram = new leaves.Telegram(params.telegram)
 		} else if (this.leaf === 'cli') {
 			this.cli = new leaves.Cli()
+		} else if (this.leaf === 'rocketchat') {
+			this.rocketchat = new leaves.RocketChat(params.rocketchat)
 		}
 	}
 
