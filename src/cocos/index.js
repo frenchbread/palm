@@ -5,7 +5,7 @@ import time from './time/coco'
 import idk from './idk/coco'
 
 export default {
-  greet,
-  time,
-  idk
+	greet,
+	time,
+	idk
 }

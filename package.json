@@ -1,38 +1,29 @@
 {
   "name": "palm",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "A tree, that can talk.",
   "main": "index.js",
+  "repository": "https://github.com/frenchbread/palm.git",
+  "author": "Damir Mustafin <frenchthebread@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "lint": "./node_modules/.bin/eslint src",
-    "build": "node_modules/babel-cli/bin/babel.js src --out-dir lib",
-    "prepublish": "npm run build",
-    "test": "node test.js"
+    "build": "yarn run clean && ./node_modules/.bin/babel src --out-dir lib",
+    "clean": "./node_modules/.bin/rimraf ./lib",
+    "prepublish": "yarn run build",
+    "test": "node test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/frenchbread/palm.git"
-  },
-  "keywords": [
-    "palm"
-  ],
-  "author": "Damir Mustafin",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/frenchbread/palm/issues"
-  },
-  "homepage": "https://github.com/frenchbread/palm#readme",
   "dependencies": {
-    "axios": "^0.15.3",
+    "axios": "^0.16.1",
     "chalk-log": "^1.2.0",
-    "lodash": "^4.14.2"
+    "lodash": "^4.17.4"
   },
   "devDependencies": {
-    "babel-cli": "^6.11.4",
-    "babel-eslint": "^6.1.2",
-    "babel-preset-latest": "^6.22.0",
-    "eslint": "^3.4.0",
-    "eslint-config-airbnb-base": "^5.0.3",
-    "eslint-plugin-import": "^2.2.0"
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.2",
+    "babel-preset-latest": "^6.24.1",
+    "eslint": "^3.19.0",
+    "rimraf": "^2.6.1",
+    "standard": "^10.0.2"
   }
 }
