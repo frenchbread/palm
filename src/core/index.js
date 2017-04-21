@@ -38,7 +38,7 @@ export default class Palm {
 		const getCoco = this.initCoco(text)
 
 		if (getCoco.ok) {
-			this[this.leaf].send({ text: getCoco.coco.exec(text) })
+			this[this.leaf].send({ text: getCoco.coco.exec(text, this[this.leaf]) })
 		} else {
 			this[this.leaf].send({ text: this.cocos.idk.exec() })
 		}
@@ -57,5 +57,9 @@ export default class Palm {
 		}
 
 		return a
+	}
+
+	addCoco (coco) {
+		this.cocos[coco.name] = coco
 	}
 }
