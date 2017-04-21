@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export default {
 	enabled: true,
 	name: 'current_time',
@@ -8,6 +10,6 @@ export default {
 		'hours'
 	],
 	exec () {
-		return new Date()
+		return `Current time is: ${moment().format('DD/MMM/YYYY HH:mm:ss')}`
 	}
 }
