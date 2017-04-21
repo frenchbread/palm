@@ -19,8 +19,12 @@ export default class Cli extends EventEmitter {
 		})
 	}
 
-	send ({ text }) {
-		l.ok(text)
+	send ({ text, level }) {
+		if (!l[level]) {
+			l.ok(text)
+		} else {
+			l[level](text)
+		}
 		this.get()
 	}
 }
