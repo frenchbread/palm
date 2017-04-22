@@ -23,7 +23,14 @@ export default class RocketChat extends EventEmitter {
 				// 	channel: '#bot_test',
 				// 	text: 'Test 2'
 				// }
+				// Post message to a chet
 				// this.axe.post('/chat.postMessage', data, { headers: this.headers })
+				// 	.then(res => {
+				// 		console.log(res.data)
+				// 	})
+				// 	.catch(err => l.error(err))
+				// Get RocketChat info
+				// this.axe.get('/info', { headers: this.headers })
 				// 	.then(res => {
 				// 		console.log(res.data)
 				// 	})
