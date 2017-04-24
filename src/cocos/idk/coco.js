@@ -2,6 +2,6 @@ export default {
 	name: 'idk',
 	keywords: [],
 	exec () {
-		return Promise.resolve('I don\'t understand what you mean, sir!')
+		return Promise.resolve('Didn\'t get it!')
 	}
 }
