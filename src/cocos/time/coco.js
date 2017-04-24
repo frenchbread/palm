@@ -10,6 +10,6 @@ export default {
 		'hours'
 	],
 	exec () {
-		return `Current time is: ${moment().format('DD/MMM/YYYY HH:mm:ss')}`
+		return Promise.resolve(`Current time is: ${moment().format('DD/MMM/YYYY HH:mm:ss')}`)
 	}
 }

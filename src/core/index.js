@@ -15,6 +15,8 @@ export default class Palm {
 			this.telegram = new leaves.Telegram(params.telegram)
 		} else if (this.leaf === 'cli') {
 			this.cli = new leaves.Cli()
+		} else if (this.leaf === 'rocketchat') {
+			this.rocketchat = new leaves.RocketChat(params.rocketchat)
 		}
 	}
 
@@ -32,13 +34,25 @@ export default class Palm {
 		this[this.leaf].send({ text })
 	}
 
+	// sendPhoto ({ photo }) {
+	// 	if (this[this.leaf].sendPhoto) {
+	// 		this[this.leaf].sendPhoto({ photo })
+	// 			.then(res => console.log(res))
+	// 			.catch(err => console.error(err))
+	// 	}
+	// }
+
 	respond ({ text }) {
 		const getCoco = this.initCoco(text)
 
 		if (getCoco.ok) {
-			this[this.leaf].send({ text: getCoco.coco.exec(text) })
+			getCoco.coco.exec(text, this[this.leaf])
+				.then(text => this.send({ text }))
+				.catch(err => l.error(err))
 		} else {
-			this[this.leaf].send({ text: this.cocos.idk.exec() })
+			this.cocos.idk.exec()
+				.then(text => this.send({ text }))
+				.catch(err => l.error(err))
 		}
 	}
 
@@ -55,5 +69,9 @@ export default class Palm {
 		}
 
 		return a
+	}
+
+	addCoco (coco) {
+		this.cocos[coco.name] = coco
 	}
 }
