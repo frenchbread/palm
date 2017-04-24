@@ -2,6 +2,11 @@ import _ from 'lodash'
 import l from 'chalk-log'
 import { EventEmitter } from 'events'
 
+// sendPhoto
+// import FormData from 'form-data'
+// import fs from 'fs'
+// import concat from 'concat-stream'
+
 import axe from '../../lib/axe'
 
 export default class Telegram extends EventEmitter {
@@ -35,6 +40,18 @@ export default class Telegram extends EventEmitter {
       .then(res => res)
       .catch(err => err)
 	}
+
+	// sendPhoto ({ photo }) {
+	// 	const promise = new Promise((resolve) => {
+	// 		const fd = new FormData()
+	// 		fd.append('photo', fs.createReadStream(photo))
+	//
+	// 		fd.pipe(concat({ encoding: 'buffer' }, data => resolve(data)))
+	// 	})
+	//
+	// 	return promise
+	// 		.then((data) => this.axe.post(`/sendPhoto&chat_id=${this.parent}`, data, { headers: { 'Content-Type': 'multipart/form-data' } }))
+	// }
 
 	getNewMessages () {
 		return this.axe.get(`/getUpdates?offset=${this._offset}`)

@@ -34,6 +34,14 @@ export default class Palm {
 		this[this.leaf].send({ text })
 	}
 
+	// sendPhoto ({ photo }) {
+	// 	if (this[this.leaf].sendPhoto) {
+	// 		this[this.leaf].sendPhoto({ photo })
+	// 			.then(res => console.log(res))
+	// 			.catch(err => console.error(err))
+	// 	}
+	// }
+
 	respond ({ text }) {
 		const getCoco = this.initCoco(text)
 
