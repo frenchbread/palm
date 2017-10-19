@@ -1,7 +1,7 @@
-import l from 'chalk-log'
 import { EventEmitter } from 'events'
 
 import axe from '../../lib/axe'
+import log from '../../lib/log'
 
 export default class RocketChat extends EventEmitter {
 	constructor (params) {
@@ -51,24 +51,24 @@ export default class RocketChat extends EventEmitter {
 			this._auth({ user: params.user, password: params.password })
 				.then(auth => {
 					if (auth.status === 'success') {
-						l.ok('Authentication successfull.')
+						log.ok('Authentication successfull.')
 						this.headers = {
 							'X-Auth-Token': auth.data.authToken,
 							'X-User-Id': auth.data.userId
 						}
 						this.authOk = true
 					} else {
-						l.error('Authentication error.')
+						log.err('Authentication error.')
 					}
 				})
-				.catch(err => l.error(err))
+				.catch(err => log.err(err.message))
 		}
 	}
 
 	_auth ({ user, password }) {
 		return this.axe.post('/login', { user, password })
 			.then(res => res.data)
-			.catch(err => l.error(err))
+			.catch(err => log.err(err.message))
 	}
 
 	_checkParams (params) {

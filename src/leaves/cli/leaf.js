@@ -1,6 +1,7 @@
 import readline from 'readline'
 import { EventEmitter } from 'events'
-import l from 'chalk-log'
+
+import log from '../../lib/log'
 
 const rl = readline.createInterface({
 	input: process.stdin,
@@ -26,7 +27,7 @@ export default class Cli extends EventEmitter {
 		// 	l[level](text)
 		// }
 
-		l.ok(text)
+		log.ok(text)
 		this.get()
 	}
 }

@@ -1,6 +1,7 @@
 import _ from 'lodash'
-import l from 'chalk-log'
 import { EventEmitter } from 'events'
+
+import log from '../../lib/log'
 
 // sendPhoto
 // import FormData from 'form-data'
@@ -31,7 +32,7 @@ export default class Telegram extends EventEmitter {
 				.then(msgs => _.forEach(msgs, msg => {
 					this.emit('message', msg.message.text)
 				}))
-				.catch(err => l.error(err))
+				.catch(err => log.err(err.message))
 		}, 3000)
 	}
 
@@ -61,9 +62,9 @@ export default class Telegram extends EventEmitter {
 					if (messages.length > 0) this._updateOffset(messages)
 					return messages
 				}
-				return l.error('Telegram response is not ok.')
+				return log.err('Telegram response is not ok.')
 			})
-			.catch(err => l.error(err))
+			.catch(err => log.err(err.message))
 	}
 
 	_updateOffset (msgs) {
@@ -75,25 +76,25 @@ export default class Telegram extends EventEmitter {
 	_checkParams (params) {
 		if (params) {
 			if (params.url) {
-				l.ok('Telegram <url> is ok.')
+				log.ok('Telegram <url> is ok.')
 			} else {
-				l.error('Telegram <url> parameter not found.')
+				log.err('Telegram <url> parameter not found.')
 			}
 
 			if (params.token) {
-				l.ok('Telegram <token> is ok.')
+				log.ok('Telegram <token> is ok.')
 			} else {
-				l.error('Telegram <token> parameter is not found.')
+				log.err('Telegram <token> parameter is not found.')
 			}
 
 			if (params.parent) {
-				l.ok('Telegram <parent> is ok.')
+				log.ok('Telegram <parent> is ok.')
 			} else {
-				l.error('Telegram <parent> parameter is not found.')
+				log.err('Telegram <parent> parameter is not found.')
 			}
 			return true
 		} else {
-			l.error('Telegram params not found.')
+			log.error('Telegram params not found.')
 			return false
 		}
 	}

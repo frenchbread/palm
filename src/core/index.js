@@ -1,8 +1,8 @@
 import _ from 'lodash'
-import l from 'chalk-log'
 
 import cocos from '../cocos'
 import leaves from '../leaves'
+import log from '../lib/log'
 
 import pkg from '../../package.json'
 
@@ -21,7 +21,7 @@ export default class Palm {
 	}
 
 	listen () {
-		l.note(`Initialized palm v${pkg.version} via ${this.leaf}`)
+		log.info(`Initialized palm v${pkg.version} via ${this.leaf}`)
 
 		this[this.leaf].init()
 
@@ -48,11 +48,11 @@ export default class Palm {
 		if (getCoco.ok) {
 			getCoco.coco.exec(text, this[this.leaf])
 				.then(text => this.send({ text }))
-				.catch(err => l.error(err))
+				.catch(err => log.err(err.message))
 		} else {
 			this.cocos.idk.exec()
 				.then(text => this.send({ text }))
-				.catch(err => l.error(err))
+				.catch(err => log.err(err.message))
 		}
 	}
 
