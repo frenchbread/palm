@@ -30,14 +30,14 @@ export default class Telegram extends EventEmitter {
 		setInterval(() => {
 			this.getNewMessages()
 				.then(msgs => _.forEach(msgs, msg => {
-					this.emit('message', msg.message.text)
+					this.emit('message', { to: msg.message.from.id, text: msg.message.text })
 				}))
 				.catch(err => log.err(err.message))
 		}, 3000)
 	}
 
-	send ({ text }) {
-		return this.axe.post(`/sendMessage?chat_id=${this.parent}&text=${text}`)
+	send ({ to, text }) {
+		return this.axe.post(`/sendMessage?chat_id=${(to) ? to : this.parent}&text=${text}`)
       .then(res => res)
       .catch(err => err)
 	}

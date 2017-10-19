@@ -25,13 +25,11 @@ export default class Palm {
 
 		this[this.leaf].init()
 
-		this[this.leaf].on('message', text => {
-			this.respond({ text })
-		})
+		this[this.leaf].on('message', ({ to, text }) => this.respond({ to, text }))
 	}
 
-	send ({ text }) {
-		this[this.leaf].send({ text })
+	send ({ to, text }) {
+		this[this.leaf].send({ to, text })
 	}
 
 	// sendPhoto ({ photo }) {
@@ -42,16 +40,16 @@ export default class Palm {
 	// 	}
 	// }
 
-	respond ({ text }) {
+	respond ({ to, text }) {
 		const getCoco = this.initCoco(text)
 
 		if (getCoco.ok) {
 			getCoco.coco.exec(text, this[this.leaf])
-				.then(text => this.send({ text }))
+				.then(text => this.send({ to, text }))
 				.catch(err => log.err(err.message))
 		} else {
 			this.cocos.idk.exec()
-				.then(text => this.send({ text }))
+				.then(text => this.send({ to, text }))
 				.catch(err => log.err(err.message))
 		}
 	}
