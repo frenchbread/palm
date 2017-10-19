@@ -126,9 +126,9 @@ Programmatic way to send a message.
 
 ###### options
 
-`to` - (String)
+`to` - (Number)
 
-Telegram `userId` or `@username` to send message to.
+Telegram `userId` to send message to.
 
 `text` - (String)
 
