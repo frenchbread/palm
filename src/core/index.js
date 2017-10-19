@@ -30,6 +30,8 @@ export default class Palm {
 
 	send ({ to, text }) {
 		this[this.leaf].send({ to, text })
+			.then(() => {})
+			.catch(err => log.err(err.message))
 	}
 
 	// sendPhoto ({ photo }) {
