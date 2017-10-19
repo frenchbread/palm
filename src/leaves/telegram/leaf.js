@@ -37,7 +37,7 @@ export default class Telegram extends EventEmitter {
 	}
 
 	send ({ to, text }) {
-		return this.axe.post(`/sendMessage?chat_id=${(to) ? to : this.parent}&text=${text}`)
+		return this.axe.post(`/sendMessage?chat_id=${to || this.parent}&text=${text}`)
       .then(res => res)
       .catch(err => err)
 	}
