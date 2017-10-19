@@ -124,9 +124,11 @@ palm.addCoco(customCoco)
 
 Programmatic way to send a message.
 
-**NOTE** In case if `telegram` is used for sending/receiving messages, response message will be send to `parent` telegram Id specified in config.
-
 ###### options
+
+`to` - (String)
+
+Telegram `userId` or `@username` to send message to.
 
 `text` - (String)
 
