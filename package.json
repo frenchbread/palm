@@ -1,6 +1,6 @@
 {
   "name": "palm",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "A tree, that can talk.",
   "main": "index.js",
   "repository": "https://github.com/frenchbread/palm.git",
